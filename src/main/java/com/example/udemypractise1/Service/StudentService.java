@@ -16,4 +16,14 @@ public class StudentService {
     public List<Student> getAll() {
         return studentRepository.findAll();
     }
+
+    public void saveAll(Student student) {
+        System.out.println("----------------Inside saveAll Method-----------");
+        studentRepository.save(student);
+    }
+
+    public Student getById(int id) {
+        Student student =studentRepository.findAllById(id);
+        return student;
+    }
 }

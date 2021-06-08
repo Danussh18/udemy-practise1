@@ -27,6 +27,7 @@ public class Student {
 
     @Column(name = "ID")
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
 //    @JsonIgnore
 //    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     // To ignore ID Field in output JSON which is done by Jackson Library Internally
