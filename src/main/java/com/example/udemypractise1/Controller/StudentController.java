@@ -7,24 +7,27 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.logging.Logger;
 
 @RestController
 @RequestMapping("/api/student")
 public class StudentController {
 
-    @Autowired
     StudentService studentService;
 
     @Value("${app.name}")
     String name;
+
+    @Autowired
+    public StudentController(StudentService studentService) {
+        this.studentService = studentService;
+    }
 
     @GetMapping("/get")
     public String getStudent(){
         return "Hello Student "+name;
     }
 
-    @GetMapping("/getByObj")
+    @GetMapping("/getRandomObj")
     public Student getStudentObject(){
         Student student = Student.builder()
                 .fname("Surya")
@@ -35,16 +38,15 @@ public class StudentController {
         return student;
     }
 
-    @GetMapping("/GetStudentById")
+    @GetMapping("/getStudentById")
     public Student getStudentById(@RequestParam("id") int id){
         return studentService.getById(id);
     }
 
     @GetMapping("/GetAllStudents")
     public List<Student> getAllStudents(){
-
         List<Student> l =  studentService.getAll();
-        l.stream().forEach( i -> System.out.println(i));
+        l.forEach(System.out::println);
         return l;
     }
 
@@ -52,6 +54,16 @@ public class StudentController {
     public Student AddAStudent(@RequestBody Student student){
         studentService.saveAll(student);
         return student;
+    }
+
+    @PutMapping("Modify")
+    public Student ModifyAStudent(@RequestBody Student student){
+        return studentService.modify(student);
+    }
+
+    @DeleteMapping("/Delete")
+    public String DeleteAStudent(@RequestParam int id){
+        return studentService.delete(id);
     }
 
 

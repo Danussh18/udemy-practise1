@@ -10,8 +10,12 @@ import java.util.List;
 @Service
 public class StudentService {
 
-    @Autowired
     StudentRepository studentRepository;
+
+    @Autowired
+    public StudentService(StudentRepository studentRepository) {
+        this.studentRepository = studentRepository;
+    }
 
     public List<Student> getAll() {
         return studentRepository.findAll();
@@ -23,7 +27,25 @@ public class StudentService {
     }
 
     public Student getById(int id) {
-        Student student =studentRepository.findAllById(id);
+        return studentRepository.findAllById(id);
+    }
+
+    public Student modify(Student student) {
+        Student oldStudent = getById(student.getId());
+        if (student.getLname()!=null)
+            oldStudent.setLname(student.getLname());
+        if (student.getEmail()!=null)
+            oldStudent.setEmail(student.getEmail());
+        if (student.getFname()!=null)
+            oldStudent.setFname(student.getFname());
+        studentRepository.save(oldStudent);
         return student;
     }
+
+
+    public String delete(int id) {
+        studentRepository.deleteById(id);
+        return "Successful";
+    }
+
 }

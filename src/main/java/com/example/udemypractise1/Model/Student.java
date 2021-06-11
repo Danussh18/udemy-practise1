@@ -1,10 +1,7 @@
 package com.example.udemypractise1.Model;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonProperty;
+
 import lombok.*;
 
-import javax.annotation.Generated;
-import javax.naming.Name;
 import javax.persistence.*;
 
 @Getter
