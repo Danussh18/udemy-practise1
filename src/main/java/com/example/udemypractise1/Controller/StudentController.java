@@ -103,4 +103,28 @@ public class StudentController {
     public List<Student> GetWithSorting(){
         return studentService.getAllStudentsWithSorting();
     }
+
+    //Like %fName%
+    @GetMapping("getByLike/{fName}")
+    public List<Student> GetByLike(@PathVariable String fName){
+        return studentService.like(fName);
+    }
+
+    //Like fName%
+    @GetMapping("/getByStart/{fName}")
+    public List<Student> GetByStart(@PathVariable String fName){
+        return studentService.getByStart(fName);
+    }
+
+    //GetByFirstNameANDLastName using JPQL
+    @GetMapping("/selectJPQL/{fname}/{lname}")
+    public Student GetByFirstNameANDLastNameJPQL(@PathVariable String fname,@PathVariable String lname){
+        return studentService.getBySelectJPQl(fname,lname);
+    }
+
+    //Update using JPQL
+    @PutMapping("updateFname/{id}/{firstName}")
+    public String updateStudentWithJPQL(@PathVariable int id,@PathVariable String firstName){
+        return studentService.updateWithJPQL(id,firstName)+" Updated";
+    }
 }

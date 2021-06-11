@@ -76,4 +76,20 @@ public class StudentService {
         Sort sort = Sort.by(Sort.Direction.ASC,"fname");
         return studentRepository.findAll(sort);
     }
+
+    public List<Student> like(String fName) {
+        return studentRepository.findByFnameContains(fName);
+    }
+
+    public List<Student> getByStart(String fName) {
+        return studentRepository.findByFnameStartsWith(fName);
+    }
+
+    public Student getBySelectJPQl(String fname, String lname) {
+        return studentRepository.getByLastNameANDFirstName(fname,lname);
+    }
+
+    public int updateWithJPQL(int id, String firstName) {
+        return studentRepository.updateFName(id,firstName);
+    }
 }
