@@ -66,5 +66,16 @@ public class StudentController {
         return studentService.delete(id);
     }
 
+    //Get Records By Particular Column
+    @GetMapping("/getByFirstName")
+    public List<Student> GetByFirstName(@RequestParam("fname") String name){
+        return studentService.getByFirstName(name);
+    }
+
+    //Get Record by FirstName AND LastName
+    @GetMapping("/getByName")
+    public Student GetByFirstNameANDLastName(@RequestParam("fname") String Fname, @RequestParam("lname") String Lname){
+        return studentService.getByFirstNameAndLastName(Fname,Lname);
+    }
 
 }

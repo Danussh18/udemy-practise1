@@ -48,4 +48,12 @@ public class StudentService {
         return "Successful";
     }
 
+    public List<Student> getByFirstName(String name) {
+        return studentRepository.findByFname(name);
+    }
+
+
+    public Student getByFirstNameAndLastName(String fname, String lname) {
+        return studentRepository.findByFnameAndLname(fname,lname);
+    }
 }
