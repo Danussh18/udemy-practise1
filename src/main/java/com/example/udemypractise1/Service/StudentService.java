@@ -2,7 +2,11 @@ package com.example.udemypractise1.Service;
 
 import com.example.udemypractise1.Model.Student;
 import com.example.udemypractise1.Repository.StudentRepository;
+import com.example.udemypractise1.Request.InQueryRequest;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -42,7 +46,6 @@ public class StudentService {
         return student;
     }
 
-
     public String delete(int id) {
         studentRepository.deleteById(id);
         return "Successful";
@@ -52,8 +55,26 @@ public class StudentService {
         return studentRepository.findByFname(name);
     }
 
-
     public Student getByFirstNameAndLastName(String fname, String lname) {
         return studentRepository.findByFnameAndLname(fname,lname);
+    }
+
+    public List<Student> getByFirstNameOrLastName(String fname, String lname) {
+        return studentRepository.findByFnameOrLname(fname,lname);
+    }
+
+    public List<Student> getByFirstNameIN(InQueryRequest inQueryRequest) {
+        return studentRepository.findByFnameIn(inQueryRequest.getFirstNames());
+    }
+
+    public List<Student> getAllStudentsWithPagination(int pageNo, int pageSize) {
+        Pageable pageable = PageRequest.of(pageNo-1,pageSize);
+
+        return studentRepository.findAll(pageable).getContent();
+    }
+
+    public List<Student> getAllStudentsWithSorting() {
+        Sort sort = Sort.by(Sort.Direction.ASC,"fname");
+        return studentRepository.findAll(sort);
     }
 }

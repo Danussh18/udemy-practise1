@@ -1,6 +1,7 @@
 package com.example.udemypractise1.Controller;
 
 import com.example.udemypractise1.Model.Student;
+import com.example.udemypractise1.Request.InQueryRequest;
 import com.example.udemypractise1.Service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -73,9 +74,32 @@ public class StudentController {
     }
 
     //Get Record by FirstName AND LastName
-    @GetMapping("/getByName")
+    @GetMapping("/getByAND")
     public Student GetByFirstNameANDLastName(@RequestParam("fname") String Fname, @RequestParam("lname") String Lname){
         return studentService.getByFirstNameAndLastName(Fname,Lname);
     }
 
+    //Get Record by FirstName OR LastName
+    @GetMapping("/getByOR")
+    public List<Student> GetByFirstNameORLastName(@RequestParam("fname") String Fname, @RequestParam("lname") String Lname){
+        return studentService.getByFirstNameOrLastName(Fname,Lname);
+    }
+
+    //Get Records using IN Operator
+    @GetMapping("getByIN")
+    public List<Student> GetByFirstNameIn(@RequestBody InQueryRequest inQueryRequest){
+        return studentService.getByFirstNameIN(inQueryRequest);
+    }
+
+    //Using Pagination
+    @GetMapping("getAllWithPagination")
+    public List<Student> GetWithPagination(@RequestParam int pageNo, @RequestParam int pageSize){
+        return  studentService.getAllStudentsWithPagination(pageNo,pageSize);
+    }
+
+    //Using Sort
+    @GetMapping("getAllWithSorting")
+    public List<Student> GetWithSorting(){
+        return studentService.getAllStudentsWithSorting();
+    }
 }
