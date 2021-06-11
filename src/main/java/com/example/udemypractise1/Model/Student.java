@@ -32,4 +32,15 @@ public class Student {
 
     @Column(name = "Email")
     String email;
+
+    @Transient
+    String fullName;
+
+    public Student(String fname, String lname, String email) {
+        this.fname = fname;
+        this.lname = lname;
+//        this.id = id;
+        this.email = email;
+        this.fullName = fname+" "+lname;
+    }
 }

@@ -69,7 +69,6 @@ public class StudentService {
 
     public List<Student> getAllStudentsWithPagination(int pageNo, int pageSize) {
         Pageable pageable = PageRequest.of(pageNo-1,pageSize);
-
         return studentRepository.findAll(pageable).getContent();
     }
 

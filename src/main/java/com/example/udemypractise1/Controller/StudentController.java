@@ -30,11 +30,12 @@ public class StudentController {
 
     @GetMapping("/getRandomObj")
     public Student getStudentObject(){
-        Student student = Student.builder()
-                .fname("Surya")
-                .lname("Garlapati")
-                .email("surya@gmail.com")
-                .build();
+//        Student student = Student.builder()
+//                .fname("Surya")
+//                .lname("Garlapati")
+//                .email("surya@gmail.com")
+//                .build();
+        Student student = new Student("Ratna","Garlapati","ratna@gmail.com");
         studentService.saveAll(student);
         return student;
     }
