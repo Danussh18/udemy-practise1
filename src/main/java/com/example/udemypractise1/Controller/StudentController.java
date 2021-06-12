@@ -3,6 +3,8 @@ package com.example.udemypractise1.Controller;
 import com.example.udemypractise1.Model.Student;
 import com.example.udemypractise1.Request.InQueryRequest;
 import com.example.udemypractise1.Service.StudentService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
@@ -12,6 +14,8 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/student")
 public class StudentController {
+
+    Logger logger = LoggerFactory.getLogger(StudentController.class);
 
     StudentService studentService;
 
@@ -25,6 +29,11 @@ public class StudentController {
 
     @GetMapping("/get")
     public String getStudent(){
+        logger.error("Inside Error");
+        logger.warn("Inside Error");
+        logger.info("Inside Error");
+        logger.debug("Inside Error");
+        logger.trace("Inside Error");
         return "Hello Student "+name;
     }
 

@@ -7,3 +7,45 @@ Swagger:
         manual efforts for API Documentation.
 
      3. Swagger provides UI, to consume the API's not just Documentation
+
+     SWAGGER API == OPEN API SPECIFICATION
+
+     http://localhost:3030/swagger-ui.html
+
+LOGGER:
+
+    1.To Debug and Troubleshoot the issue
+
+    2. Different LEVELS for Logging
+
+        Error < Warn < Info < Debug < Trace.
+        Debug Level is Widely used.
+
+        By default in spring-boot Info Level is Enabled.
+            so Error, Warn, Info are Enabled by Default.
+
+    3. We can have Different logging level for different packages and classes.
+
+    4. Logs can be stored ( used dor debugging or analyzing )
+
+        Example : 2021-06-12 14:16:43.516 ERROR 14528 --- [nio-3030-exec-7] c.e.u.Controller.StudentController       : Inside Error
+            1. 2021-06-12 14:16:43.516                      - Time Stamp
+            2. ERROR 14528 --- [nio-3030-exec-7]            - Logging type
+            3. c.e.u.Controller.StudentController           - Class Name where actually logged
+            4. Inside Error                                 - Message
+
+    5. logging.level.root = debug
+           for complete Spring boot Application logging level as debug
+        logging.level.<package name> = trace/debug...
+            for a specific package.
+
+ASPECT ORIENTED PROGRAMMING(AOP)
+
+    1. Separating the logic and provides modularity
+    2. Point Cut - Which method to Intercept?
+    3. Advice - a) Before             - Before Returning to the value
+                b) After              - After Returning but value not returned, execution completed
+                c) AfterReturning
+                d) Around             - before + after
+    4. Aspect - Combination of Point Cut and Advice.
+    5. Join Point - Execution Instance Of An Advice.
