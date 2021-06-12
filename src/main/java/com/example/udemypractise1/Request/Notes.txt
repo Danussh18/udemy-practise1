@@ -1,0 +1,9 @@
+Swagger:
+     1. Used for Documenting the API's so that Consumer will get to know the parameters,
+        end point of API, type of HTTP Request, what's the use of calling. Everything will
+        be documented in Swagger API.
+
+     2. Swagger is a tool which automatically creates documentation for the API's so less
+        manual efforts for API Documentation.
+
+     3. Swagger provides UI, to consume the API's not just Documentation

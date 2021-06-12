@@ -106,6 +106,6 @@ public class StudentService {
     }
 
     public List<Student> getByStudentsSameCity(String city) {
-        return studentRepository.findByAddressCity(city);
+        return studentRepository.getByAddressCity(city);
     }
 }
