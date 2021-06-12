@@ -1,6 +1,8 @@
 package com.example.udemypractise1.Service;
 
+import com.example.udemypractise1.Model.Address;
 import com.example.udemypractise1.Model.Student;
+import com.example.udemypractise1.Repository.AddressRepository;
 import com.example.udemypractise1.Repository.StudentRepository;
 import com.example.udemypractise1.Request.InQueryRequest;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,19 +17,25 @@ import java.util.List;
 public class StudentService {
 
     StudentRepository studentRepository;
+    AddressRepository addressRepository;
 
     @Autowired
-    public StudentService(StudentRepository studentRepository) {
+    public StudentService(StudentRepository studentRepository, AddressRepository addressRepository) {
         this.studentRepository = studentRepository;
+        this.addressRepository = addressRepository;
     }
 
     public List<Student> getAll() {
         return studentRepository.findAll();
     }
 
-    public void saveAll(Student student) {
+    public Student saveAll(Student student) {
         System.out.println("----------------Inside saveAll Method-----------");
-        studentRepository.save(student);
+        Address address = Address.builder().city(student.getAddress().getCity()).street(student.getAddress().getStreet()).build();
+        address = addressRepository.save(address);
+        student.setAddress(address);
+
+        return studentRepository.save(student);
     }
 
     public Student getById(int id) {
@@ -91,5 +99,13 @@ public class StudentService {
 
     public int updateWithJPQL(int id, String firstName) {
         return studentRepository.updateFName(id,firstName);
+    }
+
+    public Integer deleteByFnameJPQL(String fname) {
+        return studentRepository.deleteByFnameJPQL(fname);
+    }
+
+    public List<Student> getByStudentsSameCity(String city) {
+        return studentRepository.findByAddressCity(city);
     }
 }

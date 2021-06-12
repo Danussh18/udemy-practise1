@@ -33,4 +33,11 @@ public interface StudentRepository extends JpaRepository<Student,Integer> {
     @Transactional
     @Query("Update Student set fname=?2 where id = ?1")
     Integer updateFName(int id,String firstName);
+
+    @Modifying
+    @Transactional
+    @Query("delete from Student where fname = :fname")
+    Integer deleteByFnameJPQL(String fname);
+
+    List<Student> findByAddressCity(String city);
 }

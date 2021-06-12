@@ -54,8 +54,7 @@ public class StudentController {
 
     @PostMapping("/Add")
     public Student AddAStudent(@RequestBody Student student){
-        studentService.saveAll(student);
-        return student;
+       return studentService.saveAll(student);
     }
 
     @PutMapping("Modify")
@@ -126,5 +125,16 @@ public class StudentController {
     @PutMapping("updateFname/{id}/{firstName}")
     public String updateStudentWithJPQL(@PathVariable int id,@PathVariable String firstName){
         return studentService.updateWithJPQL(id,firstName)+" Updated";
+    }
+
+    //Delete using JPQL
+    @DeleteMapping("/deleteByfname/{fname}")
+    public Integer deleteByID(@PathVariable String fname){
+        return studentService.deleteByFnameJPQL(fname);
+    }
+
+    @GetMapping("/city/{city}")
+    public List<Student> getByCity(@PathVariable String city){
+        return studentService.getByStudentsSameCity(city);
     }
 }
